@@ -54,6 +54,8 @@ router.post('/login', async(req,res)=>{
             return res.status(400).json({message : "Invalid user name or password"})
          }
     })
+   }else{
+    return res.status(400).json({message : "Invalid user name or password"})
    }
 
 })
