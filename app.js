@@ -3,8 +3,9 @@ const connectDB = require('./mongooseConnect')
 const app = express()
 require('dotenv').config()
 const bodyParser = require('body-parser')
+const cors = require('cors');
 
-
+app.use(cors());
 connectDB()
 
 require("./models/user")
