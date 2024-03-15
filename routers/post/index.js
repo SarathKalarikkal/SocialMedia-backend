@@ -21,7 +21,7 @@ router.get("/list",Auth.isLoggedIn, async(req, res)=>{
 
 
     let skip = page * limit; 
-    let post = await Post.find().skip(skip).limit(limit);
+    let post = await Post.find().skip(skip).limit(limit).populate('postedBy');
    return res.json({post})
 })
 
