@@ -26,7 +26,7 @@ router.get("/list",Auth.isLoggedIn, async(req, res)=>{
     post.likes = await Like.countDocuments({postId: post._id});
     return post;
     }))
-   return res.json({post})
+   return res.json({ posts });
 })
 
 router.post('/create', Auth.isLoggedIn, (req, res)=>{
