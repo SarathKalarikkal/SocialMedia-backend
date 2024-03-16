@@ -24,6 +24,7 @@ router.get("/list",Auth.isLoggedIn, async(req, res)=>{
     let posts = await Post.find().skip(skip).limit(limit).populate('postedBy').lean();
     posts = await Promise.all(posts.map(async post =>{
     post.likes = await Like.countDocuments({postId: post._id});
+    post.comments = await Comment.countDocuments({postId: post._id});
     return post;
     }))
    return res.json({ posts });
