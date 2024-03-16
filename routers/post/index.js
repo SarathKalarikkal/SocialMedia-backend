@@ -16,12 +16,16 @@ router.get("/list",Auth.isLoggedIn, async(req, res)=>{
         page = 0
     }
     if(!limit){
-        limit = 3
+        limit = 5
     }
 
 
     let skip = page * limit; 
-    let post = await Post.find().skip(skip).limit(limit).populate('postedBy');
+    let posts = await Post.find().skip(skip).limit(limit).populate('postedBy').lean();
+    posts = await Promise.all(posts.map(async post =>{
+    post.likes = await Like.count({postId: post._id})
+    return post;
+    }))
    return res.json({post})
 })
 
